@@ -45,7 +45,7 @@ class Component(ComponentBase):
         params = self.configuration.parameters
         # Access parameters in data/config.json
         if params.get(KEY_PRINT_HELLO):
-            logging.info("Hello World")
+            logging.info("Hello Worldd")
 
         # get input table definitions
         input_tables = self.get_input_tables_definitions()
