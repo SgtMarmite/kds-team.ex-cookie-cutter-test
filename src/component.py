@@ -5,9 +5,12 @@ Template Component main class.
 import csv
 import logging
 from datetime import datetime
+from typing import List
 
-from keboola.component.base import ComponentBase
+from keboola.component.base import ComponentBase, sync_action
 from keboola.component.exceptions import UserException
+from keboola.component.sync_actions import SelectElement
+
 
 # configuration variables
 KEY_API_TOKEN = '#api_token'
@@ -90,6 +93,17 @@ class Component(ComponentBase):
         self.write_state_file({"some_state_parameter": "value"})
 
         # ####### EXAMPLE TO REMOVE END
+
+    @sync_action("listEndpoints")
+    def list_modules(self) -> List[SelectElement]:
+        endpoints = ["endpoint1", "endpoint2", "endpoint3", "endpoint4", "endpoint5"]
+        return [SelectElement(label=endpoint, value=endpoint) for endpoint in endpoints]
+
+    @sync_action("listFields")
+    def list_fields(self) -> List[SelectElement]:
+        fields = ["field1", "field2", "field3", "field4", "field5", "field6", "field7", "field8", "field9"]
+        fieldnames = ["Field1", "Field2", "Field3", "Field4", "Field5", "Field6", "Field7", "Field8", "Field9"]
+        return [SelectElement(label=name, value=field) for field, name in zip(fields, fieldnames)]
 
 
 """
