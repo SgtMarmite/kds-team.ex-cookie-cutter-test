@@ -1,1 +1,1 @@
-[]
+["listEndpoints"]

@@ -11,6 +11,7 @@
       "async": {
         "label": "List Endpoints",
         "action": "listEndpoints",
+        "cache": false,
         "autoload": []
       }
     },
