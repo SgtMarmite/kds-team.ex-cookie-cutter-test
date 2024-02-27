@@ -1,19 +1,24 @@
 {
   "type": "object",
   "title": "extractor configuration",
-  "required": [
-    "print_hello"
-  ],
   "properties": {
-    "print_hello": {
-      "type": "boolean",
-      "title": "Print Hello",
-      "propertyOrder": 1
+  "endpoint": {
+    "type": "string",
+    "title": "Endpoint",
+    "description": "Use sync action to get a list of available endpoints.",
+    "propertyOrder": 1,
+    "options": {
+      "async": {
+        "label": "List Endpoints",
+        "action": "listEndpoints",
+        "autoload": []
+      }
     },
-    "debug": {
-      "type": "boolean",
-      "title": "Debug",
-      "propertyOrder": 2
-    }
+    "items": {
+      "enum": [],
+      "type": "string"
+    },
+    "enum": []
+  }
   }
 }

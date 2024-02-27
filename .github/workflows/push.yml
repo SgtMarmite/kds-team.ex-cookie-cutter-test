@@ -8,12 +8,12 @@ env:
   KBC_DEVELOPERPORTAL_USERNAME: "kds-team+github"
 
   # to be set in repository secrets:
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }} # required for pushing to ECR
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }} # optional, to prevent rate limiting
   # KBC_STORAGE_TOKEN: ${{ secrets.KBC_STORAGE_TOKEN }} # required for running KBC tests (optional)
   # KBC_DEVELOPERPORTAL_PASSWORD: ${{ secrets.KBC_DEVELOPERPORTAL_PASSWORD }}
 
   # Test KBC project: https://connection.keboola.com/admin/projects/5415
-  KBC_TEST_PROJECT_CONFIGS: "1089160256" # space separated list of config ids (optional)
+  # KBC_TEST_PROJECT_CONFIGS: "1089160256" # space separated list of config ids (optional)
 
 jobs:
   build:
