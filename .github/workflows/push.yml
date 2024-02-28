@@ -90,6 +90,9 @@ jobs:
       - name: Build image
         run: docker build -t "${{ env.KBC_DEVELOPERPORTAL_APP }}" .
 
+      - name: Debug Echo for push_latest
+        run: echo "push_latest value is ${{ needs.push_event_info.is_deploy_ready }}"
+
       - name: Push image to ECR
         uses: keboola/action-push-to-ecr@master
         with:
