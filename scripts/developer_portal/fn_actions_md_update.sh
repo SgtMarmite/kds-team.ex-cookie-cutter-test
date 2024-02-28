@@ -4,10 +4,10 @@
 PYTHON_FILE="src/component.py"
 # Set the path to the Markdown file containing actions
 MD_FILE="component_config/actions.md"
-# Flag for adding missing actions to the file
-ADD_MISSING=false
+touch "$MD_FILE"
 
 # Check if the flag for adding missing actions was provided
+ADD_MISSING=false
 if [ "$1" == "true" ]; then
     ADD_MISSING=true
 fi
