@@ -26,6 +26,4 @@ JSON_ACTIONS=$(printf '"%s",' "${EXISTING_ACTIONS[@]}")
 JSON_ACTIONS="[${JSON_ACTIONS%,}]"
 
 # Update the content of the actions.md file
-echo "Updating Markdown file with actions..."
 echo "$JSON_ACTIONS" > "$MD_FILE"
-echo "Actions Markdown updated successfully."
