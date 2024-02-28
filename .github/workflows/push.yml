@@ -186,5 +186,4 @@ jobs:
       - name: Update developer portal properties
         run: |
           chmod +x scripts/developer_portal/*.sh
-          scripts/developer_portal/fn_actions_md_update.sh
           scripts/developer_portal/update_properties.sh
