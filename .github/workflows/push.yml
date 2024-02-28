@@ -17,6 +17,7 @@ env:
 
 jobs:
   push_event_info:
+    name: Push event info
     runs-on: ubuntu-latest
     outputs:
       app_image_tag: ${{ steps.tag.outputs.app_image_tag }}
@@ -72,6 +73,7 @@ jobs:
           fi
 
   build:
+    name: Build and push image
     runs-on: ubuntu-latest
     needs:
       - push_event_info
@@ -101,6 +103,7 @@ jobs:
           source_image: ${{ env.KBC_DEVELOPERPORTAL_APP }}
 
   tests:
+    name: Run tests
     runs-on: ubuntu-latest
     needs:
       - push_event_info
@@ -127,6 +130,7 @@ jobs:
           docker run ${{ env.KBC_DEVELOPERPORTAL_APP }} python -m unittest discover
 
   tests-kbc:
+    name: Run KBC tests
     env:
       KBC_TEST_PROJECT_CONFIGS: ${{ vars.KBC_TEST_PROJECT_CONFIGS }}
       KBC_STORAGE_TOKEN: ${{ secrets.KBC_STORAGE_TOKEN }}
@@ -145,6 +149,7 @@ jobs:
           configs: ${{ env.KBC_TEST_PROJECT_CONFIGS }}
 
   deploy:
+    name: Deploy to KBC
     env:
       KBC_DEVELOPERPORTAL_PASSWORD: ${{ secrets.KBC_DEVELOPERPORTAL_PASSWORD }}
     needs:
@@ -165,6 +170,7 @@ jobs:
           tag: ${{ needs.push_event_info.outputs.app_image_tag }}
 
   update_developer_portal_properties:
+    name: Update developer portal properties
     env:
       KBC_DEVELOPERPORTAL_PASSWORD: ${{ secrets.KBC_DEVELOPERPORTAL_PASSWORD }}
       IS_DEPLOY_READY: ${{ needs.push_event_info.outputs.is_deploy_ready }}
