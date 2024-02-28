@@ -72,6 +72,14 @@ jobs:
               echo "is_deploy_ready=false" | tee -a $GITHUB_OUTPUT
           fi
 
+      - name: Debug Echo for push_latest
+        run: |
+          echo "push_latest value is ${{ needs.push_event_info.is_deploy_ready }}"
+
+      - name: Echo is_deploy_ready from push_event_info
+        run: |
+          echo "is_deploy_ready from push_event_info: ${{ needs.push_event_info.outputs.is_deploy_ready }}"
+
   build:
     name: Build and push image
     runs-on: ubuntu-latest
