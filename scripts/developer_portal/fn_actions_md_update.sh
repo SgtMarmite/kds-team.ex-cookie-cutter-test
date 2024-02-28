@@ -8,7 +8,6 @@ MD_FILE="component_config/actions.md"
 # Check if the file exists before creating it
 if [ ! -e "$MD_FILE" ]; then
     touch "$MD_FILE"
-    echo "File created: $MD_FILE"
 else
     echo "File already exists: $MD_FILE"
 fi
