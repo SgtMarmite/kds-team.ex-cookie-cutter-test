@@ -72,13 +72,13 @@ jobs:
               echo "is_deploy_ready=false" | tee -a $GITHUB_OUTPUT
           fi
 
-      - name: Debug Echo for push_latest
+      - name: Debug is_deploy_ready
         run: |
-          echo "push_latest value is ${{ needs.push_event_info.is_deploy_ready }}"
+          echo "push_latest value is ${{ env.is_deploy_ready }}"
 
-      - name: Echo is_deploy_ready from push_event_info
+      - name: Echo app_image_tag
         run: |
-          echo "is_deploy_ready from push_event_info: ${{ needs.push_event_info.outputs.is_deploy_ready }}"
+          echo "app_image_tag: ${{ env.app_image_tag }}"
 
   build:
     name: Build and push image
