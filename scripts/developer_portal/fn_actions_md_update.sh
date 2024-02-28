@@ -15,8 +15,6 @@ fi
 
 # Get all occurrences of lines containing @sync_action('XXX') from the .py file
 SYNC_ACTIONS=$(grep -o -E "@sync_action\(['\"][^'\"]*['\"]\)" "$PYTHON_FILE" | sed "s/@sync_action(\(['\"]\)\([^'\"]*\)\(['\"]\))/\2/" | sort | uniq)
-echo "SYNC_ACTIONS: $SYNC_ACTIONS"
-
 
 # Iterate over each occurrence of @sync_action('XXX')
 for sync_action in $SYNC_ACTIONS; do
@@ -26,7 +24,6 @@ done
 # Convert the array to JSON format
 JSON_ACTIONS=$(printf '"%s",' "${EXISTING_ACTIONS[@]}")
 JSON_ACTIONS="[${JSON_ACTIONS%,}]"
-echo "JSON_ACTIONS: $JSON_ACTIONS"
 
 # Update the content of the actions.md file
 echo "Updating Markdown file with actions..."
