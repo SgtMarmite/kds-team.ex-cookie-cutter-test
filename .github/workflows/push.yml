@@ -98,8 +98,7 @@ jobs:
           username: ${{ env.KBC_DEVELOPERPORTAL_USERNAME }}
           password: ${{ secrets.KBC_DEVELOPERPORTAL_PASSWORD }}
           tag: ${{ needs.push_event_info.outputs.app_image_tag }}
-          # TODO determine the latest tag?
-          push_latest: ${{ needs.push_event_info.is_semantic_tag }}
+          push_latest: ${{ needs.push_event_info.is_deploy_ready }}
           source_image: ${{ env.KBC_DEVELOPERPORTAL_APP }}
 
   tests:
