@@ -12,7 +12,7 @@ from keboola.component.sync_actions import SelectElement
 # list of mandatory parameters => if some is missing,
 # component will fail with readable message on initialization.
 REQUIRED_PARAMETERS = []
-# test
+
 
 class Component(ComponentBase):
 
