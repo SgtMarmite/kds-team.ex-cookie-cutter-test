@@ -1,7 +1,7 @@
 CC test
 =============
 
-Description
+Descriptions
 
 **Table of contents:**
 
