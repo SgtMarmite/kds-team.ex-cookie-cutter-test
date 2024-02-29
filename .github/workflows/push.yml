@@ -199,7 +199,8 @@ jobs:
       IS_DEPLOY_READY: ${{ needs.push_event_info.outputs.is_deploy_ready }}
     needs:
       - push_event_info
-      - deploy
+      - build
+      - push
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
