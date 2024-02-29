@@ -2,18 +2,19 @@ name: Keboola Component Build & Deploy Pipeline
 on: [ push ]
 concurrency: ci-${{ github.ref }} # to avoid tag collisions in the ECR
 env:
-  DOCKERHUB_USER: "keboolabot"
-  KBC_DEVELOPERPORTAL_APP: "kds-team.ex-cookie-cutter-test"
-  KBC_DEVELOPERPORTAL_VENDOR: "kds-team"
-  KBC_DEVELOPERPORTAL_USERNAME: "kds-team+github"
+  # repository variables:
+  DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
+  KBC_DEVELOPERPORTAL_APP: ${{ vars.KBC_DEVELOPERPORTAL_APP }}
+  KBC_DEVELOPERPORTAL_VENDOR: ${{ vars.KBC_DEVELOPERPORTAL_VENDOR }}
+  KBC_DEVELOPERPORTAL_USERNAME: ${{ vars.KBC_DEVELOPERPORTAL_USERNAME }}
 
-  # to be set in repository secrets:
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }} # required for pushing to ECR
-  # KBC_STORAGE_TOKEN: ${{ secrets.KBC_STORAGE_TOKEN }} # required for running KBC tests (optional)
-  # KBC_DEVELOPERPORTAL_PASSWORD: ${{ secrets.KBC_DEVELOPERPORTAL_PASSWORD }}
+  # repository secrets:
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }} # recommended for pushing to ECR
+  KBC_DEVELOPERPORTAL_PASSWORD: ${{ secrets.KBC_DEVELOPERPORTAL_PASSWORD }}
 
-  # Test KBC project: https://connection.keboola.com/admin/projects/5415
-  KBC_TEST_PROJECT_CONFIGS: "" # space separated list of config ids (optional)
+  # (Optional) Test KBC project: https://connection.keboola.com/admin/projects/0000
+  KBC_TEST_PROJECT_CONFIGS: "" # space separated list of config ids
+  KBC_STORAGE_TOKEN: ${{ secrets.KBC_STORAGE_TOKEN }} # required for running KBC tests
 
 jobs:
   push_event_info:
