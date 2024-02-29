@@ -17,7 +17,7 @@ env:
 
 jobs:
   push_event_info:
-    name: Push event info
+    name: Push Event Info
     runs-on: ubuntu-latest
     outputs:
       app_image_tag: ${{ steps.tag.outputs.app_image_tag }}
