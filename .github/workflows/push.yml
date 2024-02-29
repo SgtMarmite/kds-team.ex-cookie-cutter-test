@@ -1,4 +1,4 @@
-name: Keboola Component Deployment Pipeline
+name: Keboola Component Build & Deploy Pipeline
 on: [ push ]
 concurrency: ci-${{ github.ref }} # to avoid tag collisions in the ECR
 env:
@@ -61,7 +61,7 @@ jobs:
           echo "is_semantic_tag=$IS_SEMANTIC_TAG" | tee -a $GITHUB_OUTPUT
           echo "app_image_tag=$TAG" | tee -a $GITHUB_OUTPUT
 
-      - name: It is ready to deploy
+      - name: Deploy-Ready check
         id: deploy_ready
         run: |
           if [[ "${{ steps.default_branch.outputs.is_default_branch }}" == "true" \
@@ -73,7 +73,7 @@ jobs:
           fi
 
   build:
-    name: Build and push image
+    name: Docker Image Build & Push
     runs-on: ubuntu-latest
     needs:
       - push_event_info
@@ -102,7 +102,7 @@ jobs:
           source_image: ${{ env.KBC_DEVELOPERPORTAL_APP }}
 
   tests:
-    name: Run tests
+    name: Run Tests
     runs-on: ubuntu-latest
     needs:
       - push_event_info
@@ -129,7 +129,7 @@ jobs:
           docker run ${{ env.KBC_DEVELOPERPORTAL_APP }} python -m unittest discover
 
   tests-kbc:
-    name: Run KBC tests
+    name: Run KBC Tests
     env:
       KBC_TEST_PROJECT_CONFIGS: ${{ vars.KBC_TEST_PROJECT_CONFIGS }}
       KBC_STORAGE_TOKEN: ${{ secrets.KBC_STORAGE_TOKEN }}
@@ -159,7 +159,7 @@ jobs:
     if: needs.push_event_info.outputs.is_deploy_ready == 'true'
     runs-on: ubuntu-latest
     steps:
-      - name: Set tag in the Developer Portal
+      - name: Set Developer Portal Tag
         uses: keboola/action-set-tag-developer-portal@master
         with:
           vendor: ${{ env.KBC_DEVELOPERPORTAL_VENDOR }}
@@ -169,7 +169,7 @@ jobs:
           tag: ${{ needs.push_event_info.outputs.app_image_tag }}
 
   update_developer_portal_properties:
-    name: Update developer portal properties
+    name: Developer Portal Properties Update
     env:
       KBC_DEVELOPERPORTAL_PASSWORD: ${{ secrets.KBC_DEVELOPERPORTAL_PASSWORD }}
       IS_DEPLOY_READY: ${{ needs.push_event_info.outputs.is_deploy_ready }}
